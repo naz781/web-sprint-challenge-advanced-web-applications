@@ -6,20 +6,24 @@ const initialFormValues = {
   password: '',
 }
 export default function LoginForm(props) {
+  const { login } = props
   const [values, setValues] = useState(initialFormValues)
   // ✨ where are my props? Destructure them here
-
-  const onChange = evt => {
-    const { id, value } = evt.target
+ 
+  const onChange = e => {
+    const { id, value } = e.target
     setValues({ ...values, [id]: value })
   }
 
-  const onSubmit = evt => {
-    evt.preventDefault()
+  const onSubmit = e => {
+    e.preventDefault()
+    login(values)
     // ✨ implement
   }
 
   const isDisabled = () => {
+   const {username, password} = values
+   return username.trim().length < 3 || password.trim().length < 8
     // ✨ implement
     // Trimmed username must be >= 3, and
     // trimmed password must be >= 8 for
